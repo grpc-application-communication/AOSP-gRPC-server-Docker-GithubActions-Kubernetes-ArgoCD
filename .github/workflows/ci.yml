@@ -21,7 +21,7 @@ jobs:
       - name: Check ADB status
         run: |
           echo ">>> Killing ADB server"
-          sudo adb kill-server
+          adb kill-server
           echo ">>> Starting ADB server"
           sudo adb start-server
           echo ">>> Listing devices"
