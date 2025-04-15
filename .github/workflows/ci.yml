@@ -14,8 +14,6 @@ jobs:
           source build/envsetup.sh
           lunch 14
 
-
-
   deploy:
     runs-on: self-hosted
     needs: build
@@ -34,8 +32,6 @@ jobs:
           echo ">>> Checking if server started"
           adb shell "ps | grep grpc_server" || echo "Server not found in process list"
           if adb shell "ps | grep grpc_server"; then echo "Server is running"; else echo "Server failed to start"; exit 1; fi
-          touch /tmp/finished_indicator_file
-
 
   trigger-client:
     runs-on: self-hosted
