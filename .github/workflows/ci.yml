@@ -13,7 +13,6 @@ jobs:
           cd /home/farah/android-aosp
           source build/envsetup.sh
           lunch 14
-          sudo adb devices
 
   connect:
     runs-on: self-hosted
