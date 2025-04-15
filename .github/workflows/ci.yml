@@ -34,3 +34,4 @@ jobs:
       - name: Trigger Client Pipeline
         run: |
           curl -X POST -F token=glptt-6aa890b66b4ae0c7165e7e4e64aa8086d4781004 -F ref=main https://gitlab.com/api/v4/projects/68155819/trigger/pipeline
+
