@@ -18,12 +18,19 @@ jobs:
     runs-on: self-hosted
     needs: build
     steps:
-      - name: Check ADB connection
+      - name: Check ADB status
         run: |
+          echo ">>> Killing ADB server"
           sudo adb kill-server
+          echo ">>> Starting ADB server"
           sudo adb start-server
+          echo ">>> Listing devices"
           sudo adb devices
-          sudo adb connect 0.0.0.0:6520
+          echo ">>> Connecting to emulator/device"
+          sudo adb connect 0.0.0.0:6520 || echo "Connection failed"
+          echo ">>> Devices after connect"
+          sudo adb devices
+
 
 
   deploy:
