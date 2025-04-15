@@ -18,7 +18,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    needs: connect
+    needs: deploy
     steps:
       - name: Start gRPC Server
         run: |
