@@ -15,9 +15,21 @@ jobs:
           lunch 14
           sudo adb devices
 
-  deploy:
+  connect:
     runs-on: self-hosted
     needs: build
+    steps:
+      - name: Check ADB connection
+        run: |
+          sudo adb kill-server
+          sudo adb start-server
+          sudo adb devices
+          sudo adb connect 0.0.0.0:6520
+
+
+  deploy:
+    runs-on: self-hosted
+    needs: connect
     steps:
       - name: Start gRPC Server
         run: |
