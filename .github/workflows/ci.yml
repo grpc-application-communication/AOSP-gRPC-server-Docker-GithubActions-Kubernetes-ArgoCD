@@ -24,10 +24,18 @@ jobs:
         run: |
           adb devices
           adb root
-          adb shell "vendor/bin/grpc_server" > grpc_server.log 2>&1 &
+          sleep 5
+          adb devices
+          echo ">>> Trying to run gRPC server"
+          adb shell "ls vendor/bin"
+          adb shell "which grpc_server" || echo "grpc_server not found"
+          adb shell "vendor/bin/grpc_server" > /tmp/grpc_server.log 2>&1 &
           sleep 30
+          echo ">>> Checking if server started"
+          adb shell "ps | grep grpc_server" || echo "Server not found in process list"
           if adb shell "ps | grep grpc_server"; then echo "Server is running"; else echo "Server failed to start"; exit 1; fi
           touch /tmp/finished_indicator_file
+
 
   trigger-client:
     runs-on: self-hosted
